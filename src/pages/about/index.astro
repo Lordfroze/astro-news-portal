@@ -1,1 +1,13 @@
-<h1>Halaman index dari about</h1>
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+---
+
+<MainLayout title="Astro About">
+  <Header />
+  <h1>Astro about</h1>
+  <p>Halaman index dari about</p>
+  <a href="/">Back to index</a>
+  <Footer name="Yoga" />
+</MainLayout>
