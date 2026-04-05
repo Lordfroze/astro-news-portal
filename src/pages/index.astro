@@ -5,7 +5,14 @@ import MainLayout from "./layouts/MainLayout.astro";
 ---
 
 <MainLayout title="Astro Index">
-  <h1>Astro index</h1>
+  <!-- inline style pada h1 element -->
+  <h1
+    style={{
+      color: "blue",
+    }}
+  >
+    Astro index
+  </h1>
   <a href="/about">About</a>
   <Footer name="Yoga" />
   <Header slot="header" />
