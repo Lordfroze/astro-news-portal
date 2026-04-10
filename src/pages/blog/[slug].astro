@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainLayout from "../../layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+import erika from "../../assets/erika.jpg";
+import { Image } from "astro:assets";
+
+export const getStaticPaths = async () => {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug }, // Menggunakan slug untuk parameter
+    props: { post }, // Menggunakan post untuk props
+  }));
+};
+
+const props = Astro.props;
+console.log(props);
+const render = await props.post.render(); // render post content
+---
+
+<MainLayout title={props.post.data.title}>
+  <h1>{props.post.data.title}</h1>
+  <!-- memanggil image dari author dari folder assets -->
+  <Image src={erika} alt="Author Image" />
+  <div>
+    <!-- memanggil content dari post -->
+    <render.Content />
+    <!-- memanggil image dari post -->
+    <img src={props.post.data.image} alt={props.post.data.title} />
+  </div>
+</MainLayout>
