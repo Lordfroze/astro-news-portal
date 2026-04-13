@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import { getCollection } from "astro:content"; // Mengimport fungsi getCollection dari astro:content
 const blogPosts = await getCollection("blog"); // Mendapatkan koleksi blog dari folder blog
 import { SEO } from "astro-seo";
+import Slider from "../components/Slider.astro";
 ---
 
 <MainLayout title="Home">
@@ -29,19 +30,10 @@ import { SEO } from "astro-seo";
     }}
   />
 
-  <!-- <h2>Slider Posts</h2>
-
-  <ul>
-    {
-      blogPosts
-        .filter((post) => post.data.isPinned)
-        .map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-          </li>
-        ))
-    }
-  </ul> -->
+  <!-- Slider Posts -->
+  <div>
+    <Slider posts={blogPosts.filter((post) => post.data.isPinned)} />
+  </div>
 
   <!-- Articles -->
   <main class="container mt-content">
