@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import erika from "../../assets/erika.jpg";
 import MainLayout from "../../layouts/MainLayout.astro";
 import { getFormattedDate } from "../../utils/global";
+import { SEO } from "astro-seo";
 
 export const getStaticPaths = async () => {
   const blogPosts = await getCollection("blog");
@@ -19,6 +20,27 @@ const { Content, remarkPluginFrontmatter } = await post.render(); // import rema
 ---
 
 <MainLayout title={post.data.title}>
+  <!-- set seo dikirim ke MainLayout -->
+  <SEO
+    slot="seo"
+    title={post.data.title}
+    description={post.data.excerpt}
+    twitter={{
+      creator: "@yusuffazeri",
+      card: "summary_large_image",
+    }}
+    openGraph={{
+      basic: {
+        type: "website",
+        title: post.data.title,
+        image: post.data.image,
+      },
+      image: {
+        alt: "Thumbnail",
+      },
+    }}
+  />
+
   <main class="mt-content">
     <div class="content-header">
       <h1>
